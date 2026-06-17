@@ -35,15 +35,65 @@
     </modules>
 	<properties>
 		<java.version>21</java.version>
-        <mybatis.version>3.5.16</mybatis.version>
+        <mybatis-plus-spring-boot3-starter.version>3.5.6</mybatis-plus-spring-boot3-starter.version>
+        <lombok.version>1.18.30</lombok.version>
+<!--        <spring-boot-starter-validation.version>3.5.14</spring-boot-starter-validation.version>-->
+<!--        <spring-boot-starter-security.version>4.0.6</spring-boot-starter-security.version>-->
+        <jjwt.version>0.12.5</jjwt.version>
+        <knife4j.version>4.4.0</knife4j.version>
 	</properties>
     <dependencyManagement>
         <dependencies>
-
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>${mybatis.version}</version>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus-spring-boot3-starter.version}</version>
+            </dependency>
+
+<!--            <dependency>-->
+<!--                <groupId>com.baomidou</groupId>-->
+<!--                <artifactId>mybatis-plus</artifactId>-->
+<!--                <version>${mybatis.version}</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.baomidou</groupId>-->
+<!--                <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--                <version>${mybatis.version}</version>-->
+<!--            </dependency>-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-validation</artifactId>-->
+<!--&lt;!&ndash;                <version>${spring-boot-starter-validation.version}</version>&ndash;&gt;-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-security</artifactId>-->
+<!--&lt;!&ndash;                <version>${spring-boot-starter-security.version}</version>&ndash;&gt;-->
+<!--            </dependency>-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
 
         </dependencies>

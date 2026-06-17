@@ -7,3 +7,21 @@ spring:
     url: jdbc:mysql://localhost:3306/fresh_reach?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
     password: 123456
+
+knife4j:
+  basic:
+    enable: false
+  setting:
+    language: zh_cn
+springdoc:
+  api-docs:
+    enabled: true
+    path: v3/api-docs
+#    username: admin
+#    password: admin
+  swagger-ui:
+    csrf:
+      enabled: true
+      path: /swagger-ui.html
+#      username: admin
+#      password: admin
