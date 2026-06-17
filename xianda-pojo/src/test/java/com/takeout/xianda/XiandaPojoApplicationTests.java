@@ -1,10 +1,10 @@
-package com.takeout.xiandacommon;
+package com.takeout.xianda;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class XiandaCommonApplicationTests {
+class XiandaPojoApplicationTests {
 
     @Test
     void contextLoads() {

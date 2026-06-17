@@ -45,6 +45,7 @@
                 <artifactId>mybatis-plus</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
+
         </dependencies>
 
     </dependencyManagement>
