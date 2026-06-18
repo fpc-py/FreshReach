@@ -9,4 +9,6 @@ public class LoginVO {
     private Long userId;
     private String phone;
     private String username;
+
+
 }

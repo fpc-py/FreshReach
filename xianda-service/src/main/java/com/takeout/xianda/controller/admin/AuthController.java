@@ -4,16 +4,15 @@ import com.takeout.xianda.dto.LoginDTO;
 import com.takeout.xianda.dto.RegisterDTO;
 import com.takeout.xianda.result.Result;
 import com.takeout.xianda.service.AuthService;
+import com.takeout.xianda.vo.CaptchaVO;
 import com.takeout.xianda.vo.LoginVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @Tag(name = "认证管理", description = "用户登录、注册等认证接口")
 @RestController
 @RequestMapping("/api/auth")
@@ -40,5 +39,10 @@ public class AuthController {
     @PostMapping("/logout")
     public Result logout(){
         return Result.success();
+    }
+
+    @GetMapping("/captcha")
+    public Result<CaptchaVO> getCaptcha(){
+        return userService.getCaptcha();
     }
 }

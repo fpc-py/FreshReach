@@ -1,5 +1,6 @@
 package com.takeout.xianda.utils;
 
+import com.takeout.xianda.constant.JwtConstant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -37,5 +38,10 @@ public class JwtUtil {
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
+    }
+
+    // 获取JWT的过期时间
+    public static long getExpireTime(String token){
+        return parseJwt(JwtConstant.SECRET_KEY, token).getExpiration().getTime();
     }
 }
