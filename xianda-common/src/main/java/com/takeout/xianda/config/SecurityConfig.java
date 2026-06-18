@@ -3,6 +3,7 @@ package com.takeout.xianda.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,6 +16,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(cors ->{})
                 // 禁用 CSRF(前后端分离项目通常不需要)
                 .csrf(csrf -> csrf.disable())
 
@@ -24,6 +26,7 @@ public class SecurityConfig {
 
                 // 配置授权规则
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                         // 放行 API 文档相关接口
                         .requestMatchers("/doc.html").permitAll()
                         .requestMatchers("/doc.html/**").permitAll()

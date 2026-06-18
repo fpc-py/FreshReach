@@ -27,4 +27,11 @@ public class AuthController {
         LoginVO loginVO = userService.login(loginDTO);
         return Result.success(loginVO);
     }
+
+
+    @Operation(summary = "用户登出",description = "登出系统")
+    @PostMapping("/logout")
+    public Result logout(){
+        return Result.success();
+    }
 }

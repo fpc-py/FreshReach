@@ -31,10 +31,10 @@ public class AuthServiceImpl implements AuthService {
             throw new LoginException(4001,"该手机号未注册");
         }
 
-//        //2，BCrypt对比密码
-//        if(!BCrypt.checkpw(dto.getPassword(),user.getPassword())){
-//            throw new LoginException(4002,"密码错误");
-//        }
+        //2，BCrypt对比密码
+        if(!BCrypt.checkpw(dto.getPassword(),user.getPassword())){
+            throw new LoginException(4002,"密码错误");
+        }
 
         //3，校验账号状态
         if(user.getStatus() == 0){
