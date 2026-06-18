@@ -3,15 +3,19 @@ package com.takeout.xianda.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.takeout.xianda.dto.LoginDTO;
+import com.takeout.xianda.dto.RegisterDTO;
 import com.takeout.xianda.entity.User;
 import com.takeout.xianda.exception.LoginException;
 
 import com.takeout.xianda.mapper.UserMapper;
+import com.takeout.xianda.result.Result;
 import com.takeout.xianda.service.AuthService;
 import com.takeout.xianda.utils.JwtUtil;
 import com.takeout.xianda.vo.LoginVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -21,6 +25,25 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Override
+    public Result register(RegisterDTO dto) {
+        //1,校验手机号是否注册
+        User exist = userMapper.selectOne(Wrappers.lambdaQuery(User.class).eq(User::getPhone, dto.getPhone()));
+        if (exist!= null){
+            throw new LoginException(4004,"该手机号已注册");
+        }
+
+        //2，BCrypt加密密码
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode(dto.getPassword());
+        //3，分装实体
+        User user = new User();
+        BeanUtils.copyProperties(dto,user);
+        user.setPassword(encode);
+        userMapper.insert(user);
+        return Result.success("注册成功");
+    }
 
     @Override
     public LoginVO login(LoginDTO dto) {
