@@ -76,6 +76,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.updateById(user);
     }
 
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        User user = User.builder()
+                .status(status)
+                .id(id)
+                .build();
+        employeeMapper.updateById(user);
+
+    }
+
 //    @Override
 //    public List<User> list() {
 //        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();

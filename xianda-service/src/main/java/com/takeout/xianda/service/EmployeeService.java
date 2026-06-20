@@ -19,5 +19,8 @@ public interface EmployeeService {
 
     void update(EmployeeDTO employeeDTO);
 
+    void startOrStop(Integer status, Long id);
+
+
 //    List<User> list();
 }
