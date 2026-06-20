@@ -56,5 +56,11 @@ public class EmployeeController {
     }
 
 
+    @Operation(summary = "更新员工信息")
+    @PutMapping
+    public Result updateEmployee(@RequestBody EmployeeDTO employeeDTO){
+        employeeService.update(employeeDTO);
+        return Result.success();
+    }
 
 }

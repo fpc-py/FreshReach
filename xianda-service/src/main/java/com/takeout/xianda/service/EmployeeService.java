@@ -17,5 +17,7 @@ public interface EmployeeService {
 
     void deletedById(Long id);
 
+    void update(EmployeeDTO employeeDTO);
+
 //    List<User> list();
 }

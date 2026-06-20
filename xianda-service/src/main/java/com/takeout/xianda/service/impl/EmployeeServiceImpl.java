@@ -50,9 +50,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void save(EmployeeDTO employeeDTO) {
         User user = new User();
         BeanUtils.copyProperties(employeeDTO,user);
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encode = passwordEncoder.encode(employeeDTO.getPassword());
-        user.setPassword(encode);
+        if (employeeDTO.getPassword() != null && employeeDTO.getPassword()!=""){
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encode = passwordEncoder.encode(employeeDTO.getPassword());
+            user.setPassword(encode);
+        }
+
         user.setStatus(1);
         employeeMapper.insert(user);
 
@@ -61,6 +64,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deletedById(Long id) {
         employeeMapper.deleteById(id);
+    }
+
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        User user = new User();
+        BeanUtils.copyProperties(employeeDTO,user);
+
+        user.setPassword("123456");
+        user.setStatus(1);
+        employeeMapper.updateById(user);
     }
 
 //    @Override
