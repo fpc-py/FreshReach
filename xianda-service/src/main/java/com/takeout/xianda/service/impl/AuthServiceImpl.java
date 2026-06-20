@@ -52,6 +52,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         BeanUtils.copyProperties(dto,user);
         user.setPassword(encode);
+        user.setStatus(1);
         userMapper.insert(user);
         return Result.success("注册成功");
     }

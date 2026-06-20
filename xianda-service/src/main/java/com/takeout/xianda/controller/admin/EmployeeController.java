@@ -1,6 +1,7 @@
 package com.takeout.xianda.controller.admin;
 
 
+import com.takeout.xianda.dto.EmployeeDTO;
 import com.takeout.xianda.dto.EmployeePageQueryDTO;
 import com.takeout.xianda.entity.User;
 import com.takeout.xianda.result.PageResult;
@@ -9,10 +10,7 @@ import com.takeout.xianda.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Tag(name = "员工管理",description = "员工管理相关接口")
@@ -40,6 +38,13 @@ public class EmployeeController {
     public Result<User> getEmployeeById(@PathVariable Long id){
         User user = employeeService.getById(id);
         return Result.success(user);
+    }
+
+    @Operation(summary = "新增员工")
+    @PostMapping
+    public Result addEmployee(@RequestBody EmployeeDTO employeeDTO){
+        employeeService.save(employeeDTO);
+        return Result.success();
     }
 
 
