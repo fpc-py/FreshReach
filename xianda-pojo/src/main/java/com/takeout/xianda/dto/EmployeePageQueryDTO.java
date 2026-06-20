@@ -12,4 +12,7 @@ public class EmployeePageQueryDTO {
     @Schema(description = "每页数量",example = "10")
     private Integer pageSize = 10;
 
+    @Schema(description = "员工名称")
+    private String userName;
+
 }

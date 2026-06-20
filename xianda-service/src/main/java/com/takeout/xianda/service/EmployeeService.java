@@ -9,5 +9,7 @@ import java.util.List;
 public interface EmployeeService {
     PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 
+    User getById(Long id);
+
 //    List<User> list();
 }

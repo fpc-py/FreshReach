@@ -26,8 +26,20 @@ public class EmployeeServiceImpl implements EmployeeService {
         Page<User> page = new Page<>(employeePageQueryDTO.getPageNum(),employeePageQueryDTO.getPageSize());
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getStatus,1);
+        if (employeePageQueryDTO.getUserName() != null && employeePageQueryDTO.getUserName()!= ""){
+            wrapper.like(User::getUsername,employeePageQueryDTO.getUserName());
+        }
         employeeMapper.selectPage(page, wrapper);
         return new PageResult(page.getTotal(), page.getRecords());
+
+    }
+
+    @Override
+    public User getById(Long id) {
+        User user = employeeMapper.selectById(id);
+
+        return user;
+
 
     }
 
