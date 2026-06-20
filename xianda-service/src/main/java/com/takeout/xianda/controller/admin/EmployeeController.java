@@ -48,5 +48,13 @@ public class EmployeeController {
     }
 
 
+    @Operation(summary = "删除员工")
+    @DeleteMapping("/{id}")
+    public Result deleteEmployeeById(@PathVariable Long id){
+        employeeService.deletedById(id);
+        return Result.success();
+    }
+
+
 
 }

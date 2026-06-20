@@ -58,6 +58,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
+    @Override
+    public void deletedById(Long id) {
+        employeeMapper.deleteById(id);
+    }
+
 //    @Override
 //    public List<User> list() {
 //        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
