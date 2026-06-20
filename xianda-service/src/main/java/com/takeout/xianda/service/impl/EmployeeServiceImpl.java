@@ -1,0 +1,41 @@
+package com.takeout.xianda.service.impl;
+
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.takeout.xianda.dto.EmployeePageQueryDTO;
+
+import com.takeout.xianda.result.PageResult;
+import com.takeout.xianda.entity.User;
+import com.takeout.xianda.mapper.EmployeeMapper;
+import com.takeout.xianda.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+    @Autowired
+    private EmployeeMapper employeeMapper;
+    @Override
+    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+
+        Page<User> page = new Page<>(employeePageQueryDTO.getPageNum(),employeePageQueryDTO.getPageSize());
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(User::getStatus,1);
+        employeeMapper.selectPage(page, wrapper);
+        return new PageResult(page.getTotal(), page.getRecords());
+
+    }
+
+//    @Override
+//    public List<User> list() {
+//        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+//        //只查询正常启用的员工
+//        wrapper.eq(User::getStatus,1);
+//        return employeeMapper.selectList(wrapper);
+//    }
+}

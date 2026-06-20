@@ -38,6 +38,8 @@ public class SecurityConfig {
 
                         // 放行认证接口(登录、注册等)
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/employee/**").permitAll()
+                        .requestMatchers("/employee/**").hasRole("ADMIN")
 
                         // 其他所有请求需要认证
                         .anyRequest().authenticated()

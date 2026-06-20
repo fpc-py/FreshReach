@@ -111,6 +111,7 @@ public class AuthServiceImpl implements AuthService {
         vo.setUserId(user.getId());
         vo.setPhone(user.getPhone());
         vo.setUsername(user.getUsername());
+        vo.setRole(user.getRole());
         return vo;
 
 

@@ -7,9 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 @SpringBootTest
 class XiandaServiceApplicationTests {
 
-//    public static void main(String[] args) {
-//        String pwd ="123456";
-//        System.out.println(BCrypt.hashpw(pwd,BCrypt.gensalt()));
-//    }
+    public static void main(String[] args) {
+        String pwd ="123456";
+        System.out.println(BCrypt.hashpw(pwd,BCrypt.gensalt()));
+    }
 
 }

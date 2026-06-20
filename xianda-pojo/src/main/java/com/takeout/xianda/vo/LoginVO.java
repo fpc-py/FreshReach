@@ -2,6 +2,7 @@ package com.takeout.xianda.vo;
 
 import lombok.Data;
 
+
 @Data
 public class LoginVO {
 
@@ -9,6 +10,7 @@ public class LoginVO {
     private Long userId;
     private String phone;
     private String username;
+    private Integer role;
 
 
 }

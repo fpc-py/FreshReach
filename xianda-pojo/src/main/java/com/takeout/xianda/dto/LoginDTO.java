@@ -20,5 +20,6 @@ public class LoginDTO {
 
     private String codeKey;
     private  String captchaCode;
+    private Integer role;
 
 }
