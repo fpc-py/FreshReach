@@ -23,4 +23,10 @@ public interface ProductService {
     Product getById(Long id);
 
     void save(ProductDTO productDTO);
+
+    void updateProduct(ProductDTO productDTO);
+
+    void deleteProduct(Long id);
+
+    void updateStatus(Long id, Integer status);
 }

@@ -105,4 +105,26 @@ public class ProductServiceImpl implements ProductService {
 
 
     }
+
+    @Override
+    public void updateProduct(ProductDTO productDTO) {
+        Product product = new Product();
+        BeanUtils.copyProperties(productDTO,product);
+        productMapper.updateById(product);
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        productMapper.deleteById(id);
+    }
+
+    @Override
+    public void updateStatus(Long id, Integer status) {
+        //builder
+        Product product = Product.builder()
+                .id(id)
+                .status(status)
+                .build();
+        productMapper.updateById(product);
+    }
 }

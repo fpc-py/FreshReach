@@ -83,4 +83,30 @@ public class ProductController {
     }
 
     //修改商品
+    @Operation(summary = "修改商品")
+    @PutMapping("/{id}")
+    public Result updateProduct(@PathVariable Long id,@RequestBody ProductDTO productDTO){
+        productService.updateProduct(productDTO);
+        return Result.success();
+    }
+
+    //删除商品
+    @Operation(summary = "删除商品")
+    @DeleteMapping("/{id}")
+    public Result deleteProduct(@PathVariable Long id){
+        productService.deleteProduct(id);
+        return Result.success();
+    }
+    //上下架商品
+    @Operation(summary = "上下架商品")
+    @PutMapping("/{id}/status")
+    public Result updateStatus(@PathVariable Long id,@RequestBody Integer status){
+        productService.updateStatus(id,status);
+        return Result.success();
+    }
+
+
+
+
+
 }
