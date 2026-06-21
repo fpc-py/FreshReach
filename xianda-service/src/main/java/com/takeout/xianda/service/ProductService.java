@@ -1,6 +1,7 @@
 package com.takeout.xianda.service;
 
 import com.takeout.xianda.dto.CategoryDTO;
+import com.takeout.xianda.dto.ProductDTO;
 import com.takeout.xianda.dto.ProductPageQueryDTO;
 import com.takeout.xianda.entity.Category;
 import com.takeout.xianda.entity.Product;
@@ -19,4 +20,7 @@ public interface ProductService {
 
     PageResult getProductList(ProductPageQueryDTO query);
 
+    Product getById(Long id);
+
+    void save(ProductDTO productDTO);
 }
