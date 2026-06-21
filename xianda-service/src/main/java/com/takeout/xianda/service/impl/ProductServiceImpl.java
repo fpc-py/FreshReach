@@ -2,13 +2,18 @@ package com.takeout.xianda.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.takeout.xianda.dto.CategoryDTO;
+import com.takeout.xianda.dto.ProductPageQueryDTO;
 import com.takeout.xianda.entity.Category;
 import com.takeout.xianda.entity.Product;
 import com.takeout.xianda.mapper.CategoryMapper;
 import com.takeout.xianda.mapper.ProductMapper;
+import com.takeout.xianda.result.PageResult;
 import com.takeout.xianda.service.ProductService;
+import com.takeout.xianda.vo.ProductPageVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +24,8 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private CategoryMapper categoryMapper;
+    @Autowired
+    private ProductMapper productMapper;
 
     @Override
     public List<Category> getCategories() {
@@ -49,5 +56,13 @@ public class ProductServiceImpl implements ProductService {
     public void deleteCategory(Long id) {
 
         categoryMapper.deleteById(id);
+    }
+
+    @Override
+    public PageResult getProductList(ProductPageQueryDTO query) {
+        Page<ProductPageVO> page = new Page<>(query.getPageNum(),query.getPageSize());
+        IPage<ProductPageVO> pageVO = productMapper.selectProductPageJoinSku(page, query);
+        return new PageResult(pageVO.getTotal(),pageVO.getRecords());
+
     }
 }

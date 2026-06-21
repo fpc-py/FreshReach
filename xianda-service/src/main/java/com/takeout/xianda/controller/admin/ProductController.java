@@ -2,8 +2,10 @@ package com.takeout.xianda.controller.admin;
 
 
 import com.takeout.xianda.dto.CategoryDTO;
+import com.takeout.xianda.dto.ProductPageQueryDTO;
 import com.takeout.xianda.entity.Category;
 import com.takeout.xianda.entity.Product;
+import com.takeout.xianda.result.PageResult;
 import com.takeout.xianda.result.Result;
 import com.takeout.xianda.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,6 +55,14 @@ public class ProductController {
     public Result deleteCategory(@PathVariable Long id){
         productService.deleteCategory(id);
         return Result.success();
+    }
+
+    //获取商品列表
+    @Operation(summary = "获取商品列表",description = "获取商品列表")
+    @GetMapping
+    public Result<PageResult> getProductList(ProductPageQueryDTO  query){
+        PageResult products = productService.getProductList(query);
+        return Result.success(products);
     }
 
 }

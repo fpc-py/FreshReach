@@ -30,3 +30,7 @@ springdoc:
       path: /swagger-ui.html
 #      username: admin
 #      password: admin
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
