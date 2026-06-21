@@ -37,7 +37,9 @@ public class SecurityConfig {
                         .requestMatchers("/api-docs/**").permitAll()
 
                         // 放行认证接口(登录、注册等)
+                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("api/products/**").permitAll()
                         .requestMatchers("/employee/**").permitAll()
                         .requestMatchers("/employee/**").hasRole("ADMIN")
 
