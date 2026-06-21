@@ -35,11 +35,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 ##阿里云OSS           //TODO已禁用
-#alioss:
-#  endpoint: oss-cn-beijing.aliyuncs.com
-#  access-key-id: LTAI5tJhCCjnCV2cWFATpZyt
-#  access-key-secret: 0zcqJeCXkB1mI8nYLLKjAar3OPd59R
-#  bucket-name: fengpengcheng
+
 
 ##阿里云OSS配置 - 使用环境变量
 alioss:
