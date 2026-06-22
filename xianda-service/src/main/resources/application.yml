@@ -33,6 +33,7 @@ springdoc:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 
 ##阿里云OSS           //TODO已禁用
 
