@@ -38,6 +38,7 @@ public class SecurityConfig {
 
                         // 放行认证接口(登录、注册等)
                         .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/orders/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("api/products/**").permitAll()
                         .requestMatchers("/employee/**").permitAll()
