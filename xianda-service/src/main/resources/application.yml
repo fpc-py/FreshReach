@@ -8,6 +8,10 @@ spring:
     username: root
     password: 123456
 
+
+  jackson:
+    # 自动将前端下划线json映射到实体驼峰属性
+    property-naming-strategy: SNAKE_CASE
   data:
     redis:
       host: localhost
