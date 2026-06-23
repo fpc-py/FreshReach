@@ -3,6 +3,7 @@ package com.takeout.xianda.service;
 import com.takeout.xianda.dto.ShopStatusDTO;
 import com.takeout.xianda.dto.ShopUpdateDTO;
 import com.takeout.xianda.entity.Shop;
+import com.takeout.xianda.entity.orderStats;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface ShopService {
 
 
     void updateShopStatus(ShopStatusDTO dto);
+
+    List<orderStats> getShopStats();
+
+    List<orderStats> getStatsByRange(String startDate,String endDate);
 }

@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.takeout.xianda.dto.ShopStatusDTO;
 import com.takeout.xianda.dto.ShopUpdateDTO;
 import com.takeout.xianda.entity.Shop;
+import com.takeout.xianda.entity.orderStats;
 import com.takeout.xianda.mapper.ShopMapper;
+import com.takeout.xianda.mapper.StatsMapper;
 import com.takeout.xianda.service.ShopService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Autowired
     private ShopMapper shopMapper;
+
+    @Autowired
+    private StatsMapper statsMapper;
     @Override
     public List<Shop> getShopInfo() {
         List<Shop> shops = shopMapper.selectList(null);
@@ -47,6 +52,22 @@ public class ShopServiceImpl implements ShopService {
                 .eq(Shop::getId,1L);
 
         shopMapper.update(null,updateWrapper);
+    }
+
+    @Override
+    public List<orderStats> getShopStats() {
+        List<orderStats> list = statsMapper.selectList(null);
+        return list;
+    }
+
+    @Override
+    public List<orderStats> getStatsByRange(String startDate,String endDate) {
+        LambdaQueryWrapper<orderStats> wrapper = new LambdaQueryWrapper<>();
+        wrapper.ge(orderStats::getDate,startDate)
+                .le(orderStats::getDate,endDate)
+                .orderByDesc(orderStats::getDate);
+        return statsMapper.selectList(wrapper);
+
     }
 
 

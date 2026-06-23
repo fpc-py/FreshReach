@@ -4,6 +4,7 @@ package com.takeout.xianda.controller.admin;
 import com.takeout.xianda.dto.ShopStatusDTO;
 import com.takeout.xianda.dto.ShopUpdateDTO;
 import com.takeout.xianda.entity.Shop;
+import com.takeout.xianda.entity.orderStats;
 import com.takeout.xianda.result.Result;
 import com.takeout.xianda.service.ShopService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -41,5 +42,22 @@ public class ShopController {
         shopService.updateShopStatus(dto);
         return Result.success();
     }
+
+    @Operation(summary = "获取今日统计")
+    @GetMapping("/stats/today")
+    public Result<List<orderStats>> getShopStats(){
+        List<orderStats> list = shopService.getShopStats();
+        return Result.success(list);
+    }
+
+    @Operation(summary = "获取日期范围统计")
+    @GetMapping("/stats/range")
+    public Result<List<orderStats>> getShopStatsByDateRange(@RequestParam("start_date")String startDate,
+                                                            @RequestParam("end_date")String endDate){
+        List<orderStats> list = shopService.getStatsByRange(startDate,endDate);
+        return Result.success(list);
+
+    }
+
 
 }
