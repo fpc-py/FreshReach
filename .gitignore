@@ -1,0 +1,40 @@
+# 依赖文件夹
+node_modules/
+
+# 打包产物dist
+dist/
+dist/*
+
+# 编辑器缓存、临时文件
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# 日志、本地环境文件
+logs/
+*.log
+.env.local
+.env.development.local
+
+# npm缓存
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 编译临时产物
+esbuild/
+*.tmp
+.cache/
+# 屏蔽上层所有旧文档、配置
+/*.md
+/.condarc
+/.gitconfig
+/corp-dev.md
+/equity-research.md
+/ib-ma.md
+/sales-bd.md
+/plugin.json
+*.zip
+*.zip-metadata.json
