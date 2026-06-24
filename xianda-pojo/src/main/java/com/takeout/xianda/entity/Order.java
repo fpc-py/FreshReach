@@ -70,6 +70,8 @@ public class Order {
     @Column(name = "detail")
     private String detail;
 
+    private Integer riderId;
+
     @Column(name = "rider_name", length = 50)
     private String riderName;
 
