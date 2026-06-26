@@ -12,6 +12,10 @@ public class Category {
     private Integer categoryId;
     private String categoryName;
     private Integer status;
+
+    private String icon;
+    private Integer sort;
+
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
 }

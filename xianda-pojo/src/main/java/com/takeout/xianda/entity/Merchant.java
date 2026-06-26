@@ -66,6 +66,12 @@ public class Merchant {
     @Column(name = "update_time")
     private LocalDateTime updateTime;
 
+    private Double rating;
+
+    private Integer sales;
+
+    private String deliverTime;
+
     @PrePersist
     protected void onCreate() {
         this.createTime = LocalDateTime.now();
