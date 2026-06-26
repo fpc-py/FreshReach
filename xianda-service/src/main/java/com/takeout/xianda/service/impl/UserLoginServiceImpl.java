@@ -1,6 +1,5 @@
 package com.takeout.xianda.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.takeout.xianda.constant.JwtConstant;
 import com.takeout.xianda.dto.LoginDTO;
 import com.takeout.xianda.entity.UserInfo;
@@ -9,16 +8,28 @@ import com.takeout.xianda.mapper.UserInfoMapper;
 import com.takeout.xianda.service.UserLoginService;
 import com.takeout.xianda.utils.JwtUtil;
 import com.takeout.xianda.vo.UserLoginVO;
+import jakarta.annotation.Resource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.takeout.xianda.Interceptor.AuthInterceptor.TOKEN_BLACKLIST;
+
 
 @Service
 public class UserLoginServiceImpl implements UserLoginService {
 
     @Autowired
     private UserInfoMapper userInfoMapper;
+
+    @Resource
+    private JwtUtil jwtUtil;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public UserLoginVO passwordLogin(LoginDTO loginDTO) {
@@ -46,5 +57,16 @@ public class UserLoginServiceImpl implements UserLoginService {
 
 
         return vo;
+    }
+
+    @Override
+    public void logout(String token) {
+        if (!jwtUtil.verifyToken(token)){
+            throw new RuntimeException("无效token");
+        }
+        long expireTime = jwtUtil.getExpireTime(token);
+        if (expireTime>0){
+            stringRedisTemplate.opsForValue().set(TOKEN_BLACKLIST+token,"1",expireTime, TimeUnit.SECONDS);
+        }
     }
 }

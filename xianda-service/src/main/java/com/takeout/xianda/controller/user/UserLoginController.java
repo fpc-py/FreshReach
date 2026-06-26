@@ -7,11 +7,8 @@ import com.takeout.xianda.vo.UserLoginVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import com.takeout.xianda.utils.JwtUtil;
 
 @Tag(name = "用户登录")
 @RestController
@@ -27,5 +24,12 @@ public class UserLoginController {
 
         UserLoginVO userInfo = userLoginService.passwordLogin(loginDTO);
         return Result.success(userInfo);
+    }
+
+    @Operation(summary = "退出登录")
+    @PostMapping("/logout")
+    public Result<Object> logout(@RequestHeader("Authorization")  String token){
+        userLoginService.logout(token);
+        return Result.success(null);
     }
 }
