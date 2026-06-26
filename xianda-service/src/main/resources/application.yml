@@ -48,3 +48,8 @@ alioss:
   access-key-id: ${ALIOSS_ACCESS_KEY_ID:your-access-key-id}
   access-key-secret: ${ALIOSS_ACCESS_KEY_SECRET:your-access-key-secret}
   bucket-name: ${ALIOSS_BUCKET_NAME:fengpengcheng}
+
+wx:
+  miniapp:
+    app-id: ${WX_APPID}
+    app-secret: ${WX_APPSECRET}

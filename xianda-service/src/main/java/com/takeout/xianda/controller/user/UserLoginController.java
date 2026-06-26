@@ -1,9 +1,11 @@
 package com.takeout.xianda.controller.user;
 
 import com.takeout.xianda.dto.LoginDTO;
+import com.takeout.xianda.dto.WxLoginDTO;
 import com.takeout.xianda.result.Result;
 import com.takeout.xianda.service.UserLoginService;
 import com.takeout.xianda.vo.UserLoginVO;
+import com.takeout.xianda.vo.WxLoginVO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +33,13 @@ public class UserLoginController {
     public Result<Object> logout(@RequestHeader("Authorization")  String token){
         userLoginService.logout(token);
         return Result.success(null);
+    }
+
+
+    @Operation(summary = "微信登录")
+    @PostMapping("/wx-login")
+    public Result<WxLoginVO> wxLogin(@RequestBody WxLoginDTO wxLoginDTO){
+        WxLoginVO vo = userLoginService.wxLogin(wxLoginDTO);
+        return  Result.success(vo);
     }
 }

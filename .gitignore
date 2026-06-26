@@ -35,3 +35,4 @@ Thumbs.db
 .gitignore
 *.md
 mvnw.cmd
+src/main/resources/application.yml
