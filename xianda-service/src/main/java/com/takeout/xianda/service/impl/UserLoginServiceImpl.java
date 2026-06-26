@@ -3,7 +3,7 @@ package com.takeout.xianda.service.impl;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+
 import com.takeout.xianda.constant.JwtConstant;
 import com.takeout.xianda.dto.LoginDTO;
 import com.takeout.xianda.dto.WxLoginDTO;
@@ -57,12 +57,14 @@ public class UserLoginServiceImpl implements UserLoginService {
         //TODO 为什么selectOne失败，mapper手写sql成功？
 
         UserInfo userInfo = userInfoMapper.selectByPhone(loginDTO.getPhone());
-        System.out.println(userInfo);
+
         //2，BCrypt对比密码
         if(!BCrypt.checkpw(loginDTO.getPassword(),userInfo.getPassword())){
             throw new LoginException(4002,"密码错误");
         }
-        String token = JwtUtil.createJwt(JwtConstant.SECRET_KEY, 60 * 60 * 1000 * 2, null);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userInfo.getId());
+        String token = JwtUtil.createJwt(JwtConstant.SECRET_KEY, 60 * 60 * 1000 * 2, claims);
         vo.setToken(token);
         vo.setId(userInfo.getId());
         vo.setName(userInfo.getName());

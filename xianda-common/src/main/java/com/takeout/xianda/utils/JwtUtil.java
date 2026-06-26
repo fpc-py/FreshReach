@@ -68,7 +68,11 @@ public class JwtUtil {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        return Long.valueOf(claims.getSubject());
+        Object obj = claims.get("userId");
+        if (obj == null){
+            throw new RuntimeException("token缺失userid,请重新登录");
+        }
+        return Long.valueOf(obj.toString());
 
     }
 }
