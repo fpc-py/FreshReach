@@ -26,8 +26,8 @@
         (SELECT SUM(s.stock) FROM t_product_sku s WHERE s.product_id = p.id AND s.status = 1) AS stock
         FROM t_product p
         WHERE p.status = 1
-        <if test="query != null and query.productName != null and query.productName.trim() != ''">
-            AND p.product_name LIKE CONCAT('%', #{query.productName}, '%')
+        <if test="productName != null and productName.trim() != ''">
+            AND p.product_name LIKE CONCAT('%', #{productName}, '%')
         </if>
         ORDER BY p.create_time DESC
     </select>

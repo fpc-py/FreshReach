@@ -18,7 +18,7 @@ public interface ProductService {
 
     void deleteCategory(Long id);
 
-    PageResult getProductList(ProductPageQueryDTO query);
+    PageResult getProductList(String productName,Integer page,Integer pageSize);
 
     Product getById(Long id);
 

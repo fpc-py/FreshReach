@@ -61,8 +61,10 @@ public class ProductController {
     //获取商品列表
     @Operation(summary = "获取商品列表",description = "获取商品列表")
     @GetMapping
-    public Result<PageResult> getProductList(ProductPageQueryDTO  query){
-        PageResult products = productService.getProductList(query);
+    public Result<PageResult> getProductList(@RequestParam("productName") String productName,
+                                             @RequestParam("page") Integer page,
+                                             @RequestParam("pageSize") Integer pageSize){
+        PageResult products = productService.getProductList(productName,page,pageSize);
         return Result.success(products);
     }
 

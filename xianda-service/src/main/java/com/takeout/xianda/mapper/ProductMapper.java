@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface ProductMapper extends BaseMapper<Product> {
 
-    IPage<ProductPageVO> selectProductPageJoinSku(IPage<ProductPageVO> page, @Param("query") ProductPageQueryDTO query);
+    IPage<ProductPageVO> selectProductPageJoinSku(IPage<ProductPageVO> page, String productName);
 
 
 

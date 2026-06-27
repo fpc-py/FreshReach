@@ -1,7 +1,9 @@
 package com.takeout.xianda.service.impl;
 
+import com.takeout.xianda.result.PageResult;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.takeout.xianda.dto.ShopStatusDTO;
 import com.takeout.xianda.dto.ShopUpdateDTO;
 import com.takeout.xianda.entity.Shop;
@@ -68,6 +70,16 @@ public class ShopServiceImpl implements ShopService {
                 .orderByDesc(orderStats::getDate);
         return statsMapper.selectList(wrapper);
 
+    }
+
+    @Override
+    public PageResult getShops(String type,Integer page,Integer pageSize) {
+        Page<Shop> pages = new Page<>(page,pageSize);
+        LambdaQueryWrapper<Shop> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Shop::getIsOpen,1);
+        wrapper.like(Shop::getType,type);
+        shopMapper.selectPage(pages,wrapper);
+        return new PageResult(pages.getTotal(),pages.getRecords());
     }
 
 

@@ -28,8 +28,10 @@ public class EmployeeController {
 
     @Operation(summary = "分页查询",description = "分页")
     @GetMapping("/page")
-    public Result<PageResult> list(EmployeePageQueryDTO employeePageQueryDTO){
-      PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
+    public Result<PageResult> list(@RequestParam("userName")String userName,
+                                   @RequestParam("page")Integer page,
+                                   @RequestParam("pageSize")Integer pageSize){
+      PageResult pageResult = employeeService.pageQuery(page,pageSize,userName);
       return Result.success(pageResult);
     }
 

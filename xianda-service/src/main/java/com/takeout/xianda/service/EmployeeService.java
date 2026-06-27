@@ -8,7 +8,7 @@ import com.takeout.xianda.result.PageResult;
 import java.util.List;
 
 public interface EmployeeService {
-    PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+    PageResult pageQuery(Integer page,Integer pageSize,String userName);
 
     User getById(Long id);
 

@@ -66,9 +66,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PageResult getProductList(ProductPageQueryDTO query) {
-        Page<ProductPageVO> page = new Page<>(query.getPageNum(),query.getPageSize());
-        IPage<ProductPageVO> pageVO = productMapper.selectProductPageJoinSku(page, query);
+    public PageResult getProductList(String productName,Integer page,Integer pageSize) {
+        Page<ProductPageVO> pages = new Page<>(page,pageSize);
+        IPage<ProductPageVO> pageVO = productMapper.selectProductPageJoinSku(pages, productName);
         return new PageResult(pageVO.getTotal(),pageVO.getRecords());
 
     }

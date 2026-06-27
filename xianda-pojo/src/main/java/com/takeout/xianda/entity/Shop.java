@@ -26,7 +26,7 @@ public class Shop {
     private BigDecimal deliveryFee;
     private BigDecimal minAmount;
     private String notice;
-
+private String type;
     @PrePersist
     protected void onCreate() {
         if (this.createTime == null) {

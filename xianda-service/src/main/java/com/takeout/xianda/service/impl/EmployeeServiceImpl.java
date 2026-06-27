@@ -24,16 +24,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeMapper employeeMapper;
     @Override
-    public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
+    public PageResult pageQuery(Integer page,Integer pageSize,String userName) {
 
-        Page<User> page = new Page<>(employeePageQueryDTO.getPageNum(),employeePageQueryDTO.getPageSize());
+        Page<User> pages = new Page<>(page,pageSize);
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(User::getStatus,1);
-        if (employeePageQueryDTO.getUserName() != null && employeePageQueryDTO.getUserName()!= ""){
-            wrapper.like(User::getUsername,employeePageQueryDTO.getUserName());
+        if (userName != null && userName!= ""){
+            wrapper.like(User::getUsername,userName);
         }
-        employeeMapper.selectPage(page, wrapper);
-        return new PageResult(page.getTotal(), page.getRecords());
+        employeeMapper.selectPage(pages, wrapper);
+        return new PageResult(pages.getTotal(), pages.getRecords());
 
     }
 
