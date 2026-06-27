@@ -17,6 +17,8 @@ import com.takeout.xianda.mapper.SpecsMapper;
 import com.takeout.xianda.result.PageResult;
 import com.takeout.xianda.service.ProductService;
 import com.takeout.xianda.vo.ProductPageVO;
+import com.takeout.xianda.vo.ProductVO;
+import com.takeout.xianda.vo.SearchVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -126,5 +128,51 @@ public class ProductServiceImpl implements ProductService {
                 .status(status)
                 .build();
         productMapper.updateById(product);
+    }
+
+    @Override
+    public PageResult getProductLists(String category, Integer shopId, Integer page, Integer pageSize) {
+        Page<Product> page1 = new Page<>(page,pageSize);
+        LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Product::getCategoryId,category);
+        productMapper.selectPage(page1,wrapper);
+        return new PageResult(page1.getTotal(),page1.getRecords());
+
+
+    }
+
+    @Override
+    public ProductVO getProductById(Integer productId) {
+        LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Product::getId,productId);
+        Product product = productMapper.selectOne(wrapper);
+        ProductVO vo = new ProductVO();
+        vo.setId(product.getId());
+        vo.setImage(product.getCoverImage());
+        vo.setSales(product.getStoreId());
+        vo.setName(product.getProductName());
+        vo.setCategory(product.getCategoryId());
+        return vo;
+    }
+
+    @Override
+    public List<SearchVO> searchProduct(String keyword) {
+
+        LambdaQueryWrapper<Product> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(Product::getProductName,keyword);
+        List<Product> productList = productMapper.selectList(wrapper);
+        List<SearchVO> collected = productList.stream().map(p -> {
+            SearchVO vo = new SearchVO();
+            vo.setId(p.getId());
+            vo.setName(p.getProductName());
+            vo.setImage(p.getCoverImage());
+            vo.setPrice(null);   //TODO sku 查价格
+            return vo;
+
+        }).collect(Collectors.toList());
+
+
+        return collected;
+
     }
 }
