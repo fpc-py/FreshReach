@@ -1,3 +1,142 @@
+# 鲜达外卖配送系统 (FreshReach)（第一阶段：单体MVP）正在开发中......
+
+一个完整的外卖配送系统，包含商户端、客户端小程序、骑手端等多个模块。
+
+## 用户端
+![用户端截图](./images/用户端.png)
+
+## 商家端
+![商家端截图](./images/商家端.png)
+
+## 骑手端
+![骑手端截图](./images/骑手端.png)
+
+
+## 项目架构
+
+```
+FreshReach/
+├── merchant-web/     # 商户端管理后台 (Vue 3 + Vite)
+├── miniprogram/      # 客户端微信小程序
+├── rider-h5/         # 骑手端 H5 (Vue 3)
+├── rider-miniprogram/# 骑手端微信小程序
+└── xianda-server/    # 后端服务 (Spring Boot 3.2)
+```
+
+## 技术栈
+
+### 后端
+- **框架**: Spring Boot 3.2
+- **数据库**: MySQL + Redis
+- **ORM**: MyBatis Plus + JPA
+- **安全**: Spring Security + JWT
+- **文档**: Swagger/OpenAPI 3
+
+### 前端
+- **商户端**: Vue 3 + Composition API + Vite + Element Plus + Pinia + Vue Router
+- **小程序**: 原生微信小程序开发
+
+## 快速开始
+
+### 环境要求
+- JDK 17+
+- Node.js 18+
+- MySQL 8.0+
+- Redis 6.0+
+
+### 后端启动
+
+```bash
+cd xianda-server
+# 编译项目
+mvn clean package -DskipTests
+
+# 运行服务
+java -jar xianda-service/target/xianda-service-0.0.1-SNAPSHOT.jar
+```
+
+服务启动后访问 http://localhost:8080
+
+### 前端启动
+
+```bash
+cd merchant-web
+npm install
+npm run dev
+```
+
+前端启动后访问 http://localhost:3000
+
+## 功能模块
+
+### 商户端 (merchant-web)
+- 工作台仪表盘
+- 订单管理（接单、拒单、完成备餐）
+- 商品管理（分类、商品上下架）
+- 员工管理
+- 数据报表
+- 店铺设置
+
+### 客户端小程序 (miniprogram)
+- 商品浏览
+- 购物车
+- 订单管理
+- 用户中心
+
+### 骑手端 (rider-h5 / rider-miniprogram)
+- 抢单功能
+- 订单配送
+- 收入统计
+- 配送路线
+
+## 项目结构
+
+### 后端模块
+```
+xianda-server/
+├── xianda-common/    # 公共模块（配置、工具类、结果封装）
+├── xianda-pojo/      # 实体类（Entity、DTO、VO）
+└── xianda-service/   # 服务模块（Controller、Service、Mapper）
+```
+
+### 前端模块
+```
+merchant-web/src/
+├── api/            # API 接口定义
+├── components/     # 公共组件
+├── layout/         # 布局组件
+├── router/         # 路由配置
+├── stores/         # Pinia 状态管理
+├── utils/          # 工具函数
+└── views/          # 页面组件
+```
+
+## API 文档
+
+启动后端服务后，访问 Swagger 文档：
+- http://localhost:8080/doc.html
+
+## 数据库初始化
+
+数据库初始化脚本位于各模块的 SQL 文件中。
+
+## 配置说明
+
+### 后端配置
+配置文件位于 `xianda-server/xianda-service/src/main/resources/application.yml`
+
+主要配置项：
+- 数据库连接
+- Redis 连接
+- JWT 密钥
+- 微信小程序配置
+
+### 前端配置
+环境配置文件位于 `merchant-web/.env.development`
+
+
+
+####总的三阶段开发
 ## 技术选型方案与理由
 
 ### 2.1 核心框架与语言
