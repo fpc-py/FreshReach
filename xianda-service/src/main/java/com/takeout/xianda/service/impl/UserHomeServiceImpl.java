@@ -89,7 +89,7 @@ public class UserHomeServiceImpl implements UserHomeService {
             v.setOriginalPrice(null);
             v.setImage(p.getCoverImage());
             v.setSales(p.getStoreId());
-            v.setCategory("热销推荐");
+            v.setCategory(1);
             return v;
         }).collect(Collectors.toList());
         vo.setProducts(collected3);

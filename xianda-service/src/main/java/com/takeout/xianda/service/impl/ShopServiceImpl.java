@@ -1,5 +1,7 @@
 package com.takeout.xianda.service.impl;
 
+import com.takeout.xianda.entity.Product;
+import com.takeout.xianda.mapper.ProductMapper;
 import com.takeout.xianda.result.PageResult;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -11,6 +13,8 @@ import com.takeout.xianda.entity.orderStats;
 import com.takeout.xianda.mapper.ShopMapper;
 import com.takeout.xianda.mapper.StatsMapper;
 import com.takeout.xianda.service.ShopService;
+import com.takeout.xianda.vo.ProductVO;
+import com.takeout.xianda.vo.ShopVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ShopServiceImpl implements ShopService {
+    @Autowired
+    private ProductMapper productMapper;
 
     @Autowired
     private ShopMapper shopMapper;
@@ -80,6 +87,27 @@ public class ShopServiceImpl implements ShopService {
         wrapper.like(Shop::getType,type);
         shopMapper.selectPage(pages,wrapper);
         return new PageResult(pages.getTotal(),pages.getRecords());
+    }
+
+    @Override
+    public ShopVO getDetails(Integer shopId) {
+        Shop shop = shopMapper.selectById(shopId);
+        ShopVO details = new ShopVO();
+        BeanUtils.copyProperties(shop,details);
+        List<Product> productList = productMapper.selectList(new LambdaQueryWrapper<Product>().eq(Product::getStoreId,shopId));
+        List<ProductVO> collected = productList.stream().map(p -> {
+            ProductVO vo = new ProductVO();
+            vo.setId(p.getId());
+            vo.setName(p.getProductName());
+            vo.setImage(p.getCoverImage());
+            vo.setSales(p.getStoreId());
+            vo.setPrice(null);
+            vo.setCategory(p.getStoreId());
+
+            return vo;
+        }).collect(Collectors.toList());
+        details.setProducts(collected);
+        return details;
     }
 
 

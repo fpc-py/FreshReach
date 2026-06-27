@@ -20,4 +20,6 @@ public class ShopVO {
     private BigDecimal minPrice;
     private List<String> tags;
     private String type;
+
+    private List<ProductVO> products;
 }

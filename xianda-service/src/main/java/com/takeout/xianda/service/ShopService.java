@@ -5,6 +5,7 @@ import com.takeout.xianda.dto.ShopUpdateDTO;
 import com.takeout.xianda.entity.Shop;
 import com.takeout.xianda.entity.orderStats;
 import com.takeout.xianda.result.PageResult;
+import com.takeout.xianda.vo.ShopVO;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface ShopService {
     List<orderStats> getStatsByRange(String startDate,String endDate);
 
     PageResult getShops(String type,Integer page,Integer pageSize);
+
+    ShopVO getDetails(Integer shopId);
 }
