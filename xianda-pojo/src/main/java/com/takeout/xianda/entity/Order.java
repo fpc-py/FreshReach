@@ -28,6 +28,8 @@ public class Order {
     @Column(name = "id", length = 30)
     private String id; // 订单号，由后端生成，非自增
 
+    private Long userId;
+
     @Column(name = "merchant_id", nullable = false)
     private Long merchantId;
 
@@ -95,6 +97,8 @@ public class Order {
 
     @Column(name = "finish_time")
     private LocalDateTime finishTime;
+
+    private LocalDateTime payTime;
 
     @PrePersist
     protected void onCreate() {

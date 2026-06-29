@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeout.xianda.mapper.TOrdersMapperMapper">
+
+
+    <select id="selectUserOrderList" resultType="com.takeout.xianda.vo.UserOrderVO">
+        SELECT
+        o.id AS orderNo,
+        o.id,
+        o.status,
+        o.merchant_id AS shopId,
+        o.pay_amount AS payPrice,
+        o.delivery_fee AS deliveryFee,
+        o.discount_amount AS discount,
+        o.total_amount AS goodsAmount,
+        (o.total_amount + o.delivery_fee) AS totalPrice,
+        DATE_FORMAT(o.create_time,'%Y-%m-%d %H:%i:%s') createTime,
+        DATE_FORMAT(o.pay_time,'%Y-%m-%d %H:%i:%s') payTime,
+        o.name,
+        o.phone,
+        CONCAT_WS('',o.province,o.city,o.district,o.detail) AS detail
+        FROM orders o
+        WHERE o.user_id = #{userId}
+        <if test="status != null and status != ''">
+            AND o.status = #{status}
+        </if>
+        ORDER BY o.create_time DESC
+    </select>
+</mapper>

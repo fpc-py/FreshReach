@@ -1,6 +1,7 @@
 package com.takeout.xianda.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.takeout.xianda.dto.CreateOrderDTO;
 import com.takeout.xianda.dto.OrderQueryDTO;
 import com.takeout.xianda.dto.UserOrderQueryDTO;
 import com.takeout.xianda.entity.Order;
@@ -25,4 +26,10 @@ public interface OrderService {
     void rejectRefund(String id, String cancelReason);
 
     Page<UserOrderVO> getUserOrderPage(UserOrderQueryDTO dto, Long userId);
+
+    UserOrderVO getUserOrderDetail(String orderId, Long userId);
+
+    String createOrder(CreateOrderDTO dto, Long userId);
+
+    void cancelOrder(String orderId, Long userId, String cancelReason);
 }

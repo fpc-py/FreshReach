@@ -28,6 +28,8 @@ public class OrderItem {
     @Column(name = "order_id", nullable = false, length = 30)
     private String orderId;
 
+    private Integer productId;
+
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
@@ -39,4 +41,7 @@ public class OrderItem {
 
     @Column(name = "specs", length = 50)
     private String specs;
+    private  String image;
+
+
 }

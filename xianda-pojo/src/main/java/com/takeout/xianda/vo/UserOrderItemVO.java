@@ -10,4 +10,8 @@ public class UserOrderItemVO {
     private String name;
     private Integer quantity;
     private BigDecimal price;
+    private String image;
+    private Integer productId;
+    
+
 }

@@ -63,6 +63,9 @@ public class JwtUtil {
 
     //从token中获取用户id
     public Long getUserId(String token){
+        if (token == null || token.trim().isEmpty()){
+            throw new RuntimeException("token不能为空");
+        }
         Claims claims = Jwts.parser()
                 .setSigningKey(key)
                 .build()
