@@ -100,6 +100,10 @@ public class Order {
 
     private LocalDateTime payTime;
 
+    private String payMethod;
+
+    private Integer payStatus;
+
     @PrePersist
     protected void onCreate() {
         if (this.createTime == null) {

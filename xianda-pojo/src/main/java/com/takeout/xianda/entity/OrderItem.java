@@ -28,7 +28,11 @@ public class OrderItem {
     @Column(name = "order_id", nullable = false, length = 30)
     private String orderId;
 
+    @Column(name = "product_id", nullable = false)
     private Integer productId;
+
+    private Integer shopId;
+    private Double totalPrice;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
@@ -41,7 +45,9 @@ public class OrderItem {
 
     @Column(name = "specs", length = 50)
     private String specs;
-    private  String image;
+
+    @Column(name = "image", length = 255)
+    private String image;
 
 
 }

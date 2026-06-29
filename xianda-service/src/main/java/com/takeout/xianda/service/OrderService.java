@@ -32,4 +32,7 @@ public interface OrderService {
     String createOrder(CreateOrderDTO dto, Long userId);
 
     void cancelOrder(String orderId, Long userId, String cancelReason);
+
+    void payOrder(String orderId, Long userId, String payMethod);
+
 }

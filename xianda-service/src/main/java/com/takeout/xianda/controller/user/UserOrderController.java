@@ -111,4 +111,22 @@ private JwtUtil jwtUtil;
             return Result.error(500, e.getMessage());
         }
     }
+
+    @Operation(summary = "订单支付（模拟微信支付）")
+    @PostMapping("/{orderId}/pay")
+    public Result<Map<String, Object>> payOrder(
+            @PathVariable String orderId,
+            @RequestHeader(value = "Authorization", required = false) String token,
+            @RequestParam(required = false) String payMethod
+    ){
+        Long userId = jwtUtil.getUserId(token);
+        orderService.payOrder(orderId,userId,payMethod);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", "success");
+        result.put("orderId", orderId);
+        result.put("payMethod", payMethod!= null?payMethod:"wx");
+        result.put("message","支付成功");
+        return Result.success(result);
+    }
 }

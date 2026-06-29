@@ -28,7 +28,7 @@ public class EmployeeController {
 
     @Operation(summary = "分页查询",description = "分页")
     @GetMapping("/page")
-    public Result<PageResult> list(@RequestParam("userName")String userName,
+    public Result<PageResult> list(@RequestParam(value = "userName",required = false)String userName,
                                    @RequestParam("page")Integer page,
                                    @RequestParam("pageSize")Integer pageSize){
       PageResult pageResult = employeeService.pageQuery(page,pageSize,userName);

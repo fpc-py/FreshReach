@@ -350,7 +350,9 @@ public class  OrderServiceImpl implements OrderService {
         for (OrderItemDTO itemDTO : dto.getItems()) {
             OrderItem item = OrderItem.builder()
                     .orderId(orderId)
-                    .productId(itemDTO.getProductId())
+                    .shopId(1)
+                    .totalPrice(1.0)
+                    .productId(1)        //TODO
                     .name(itemDTO.getName())
                     .price(itemDTO.getPrice())
                     .quantity(itemDTO.getQuantity())
@@ -386,6 +388,30 @@ public class  OrderServiceImpl implements OrderService {
         order.setStatus("cancelled");
         order.setCancelReason(cancelReason);
         tOrdersMapper.updateById(order);
+    }
+
+    @Override
+    public void payOrder(String orderId, Long userId, String payMethod) {
+        LambdaQueryWrapper<Order> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(Order::getId, orderId);
+        Order order = tOrdersMapper.selectOne(wrapper);
+
+        if (order == null) {
+            throw new BusinessException("订单不存在");
+        }
+        if (order.getUserId() != null && !order.getUserId().equals(userId)) {
+            throw new BusinessException("订单不存在");
+        }
+        if (!"pending".equals(order.getStatus())) {
+            throw new BusinessException("订单状态不支持支付");
+        }
+
+        order.setPayStatus(1);
+        order.setPayMethod(payMethod != null ? payMethod : "wx");
+        order.setPayTime(LocalDateTime.now());
+        tOrdersMapper.updateById(order);
+
+
     }
 }
 
