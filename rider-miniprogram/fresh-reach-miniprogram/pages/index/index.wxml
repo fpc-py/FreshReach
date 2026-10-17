@@ -1,0 +1,58 @@
+<view class="page-container">
+  <view class="status-bar card">
+    <view class="status-info">
+      <text class="status-label">当前状态</text>
+      <text class="{{['status-value', isOnline ? 'online' : 'offline']}}">
+        {{ isOnline ? '在线' : '离线' }}
+      </text>
+    </view>
+    <view class="switch" bindtap="toggleStatus">
+      <view class="switch-track {{isOnline ? 'active' : ''}}">
+        <view class="switch-thumb"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-header">
+    <text class="section-title">可抢订单</text>
+    <text class="refresh-btn" bindtap="loadOrders">刷新</text>
+  </view>
+
+  <view class="order-list" wx:if="{{orders.length > 0}}">
+    <view class="order-card card" wx:for="{{orders}}" wx:key="id">
+      <view class="order-header">
+        <text class="order-id">订单号: {{item.id}}</text>
+        <text class="delivery-fee">配送费 ¥{{item.deliveryFee}}</text>
+      </view>
+
+      <view class="order-address">
+        <view class="address-item">
+          <view class="dot shop-dot"></view>
+          <view class="address-content">
+            <text class="address-label">取货地址</text>
+            <text class="address-detail">{{item.detail || '商家地址'}}</text>
+          </view>
+        </view>
+        <view class="address-line"></view>
+        <view class="address-item">
+          <view class="dot user-dot"></view>
+          <view class="address-content">
+            <text class="address-label">收货地址</text>
+            <text class="address-detail">{{item.province}}{{item.city}}{{item.district}}{{item.detail}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="order-footer">
+        <text class="order-time">{{item.createTimeText}}</text>
+        <button class="btn-grab" data-order="{{item}}" bindtap="handleGrab">立即抢单</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:else>
+    <text class="empty-icon">📦</text>
+    <text class="empty-text">暂无可抢订单</text>
+    <text class="empty-tip">点击刷新获取最新订单</text>
+  </view>
+</view>
